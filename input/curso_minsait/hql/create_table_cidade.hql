@@ -1,7 +1,7 @@
 
         CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
             id_cidade string,
-            ds_cidadestring,
+            ds_cidade string,
             id_estado string
         )
         COMMENT 'Tabela de cidade'
@@ -14,7 +14,7 @@
 
         CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_GERENCIADA}(
             id_cidade string,
-            ds_cidadestring,
+            ds_cidade string,
             id_estado string        
                 )
         PARTITIONED BY (DT_FOTO STRING)
@@ -30,9 +30,9 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-            id_cidade string,
-            ds_cidadestring,
-            id_estado string,
-      ${PARTICAO} as DT_FOTO  
-  FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
-  ;
+    id_cidade string,
+    ds_cidade string,
+    id_estado string,
+    ${PARTICAO} as DT_FOTO  
+  FROM ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
+;
