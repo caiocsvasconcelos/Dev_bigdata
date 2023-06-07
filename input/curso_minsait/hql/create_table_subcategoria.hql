@@ -1,5 +1,5 @@
 
-        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
+        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}(
             id_subcategoria string,
             ds_subcategoria string,
             id_categoria string
@@ -33,6 +33,6 @@ SELECT
     id_subcategoria string,
     ds_subcategoria string,
     id_categoria string,
-      ${PARTICAO} as DT_FOTO  
-  FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
+    ${PARTICAO} as DT_FOTO  
+FROM  ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}
   ;

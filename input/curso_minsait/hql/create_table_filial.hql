@@ -1,5 +1,5 @@
 
-        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
+        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}(
             id_filial string,
             ds_filial string,
             id_cidade string
@@ -34,5 +34,5 @@ SELECT
     ds_filial string,
     id_cidade string,
     ${PARTICAO} as DT_FOTO  
-  FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
+  FROM  ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}
   ;

@@ -1,5 +1,5 @@
 
-        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
+        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}(
             id_pedido string,
             id_produto string,
             quantidade string,
@@ -37,5 +37,5 @@ SELECT
     quantidade string,
     vr_unitario string,
     ${PARTICAO} as DT_FOTO  
-  FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
+  FROM  ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}
   ;

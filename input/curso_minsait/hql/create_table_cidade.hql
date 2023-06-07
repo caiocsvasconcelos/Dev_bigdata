@@ -1,5 +1,5 @@
 
-        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
+        CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}(
             id_cidade string,
             ds_cidade string,
             id_estado string
@@ -27,12 +27,12 @@ SET hive.exec.dynamic.partition=true;
 SET hive.exec.dynamic.partition.mode=nonstrict;
 
 INSERT OVERWRITE TABLE
-    ${TARGET_DATABASE}.${TARGET_TABLE_GERENCIADA}
+${TARGET_DATABASE}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-    id_cidade string,
-    ds_cidade string,
-    id_estado string,
-    ${PARTICAO} as DT_FOTO  
-  FROM ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
+id_cidade string,
+ds_cidade string,
+id_estado string,
+${PARTICAO} as DT_FOTO  
+FROM ${TARGET_DATABASE_STG}.${TARGET_TABLE_EXTERNAL}
 ;
