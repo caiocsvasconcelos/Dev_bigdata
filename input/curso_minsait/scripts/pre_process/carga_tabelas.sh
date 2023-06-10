@@ -15,8 +15,7 @@ do
     TARGET_TABLE_EXTERNAL="$table"
     TARGET_TABLE_GERENCIADA="tb_$table"
 
-
-    beeline -u jdbc:hive2://localhost:10000 \
+    beeline -u jdbc:hive2://localhost:10000\
     --hivevar TARGET_DATABASE="${TARGET_DATABASE}"\
     --hivevar TARGET_DATABASE_STG="${TARGET_DATABASE_STG}"\
     --hivevar HDFS_DIR="${HDFS_DIR}"\
