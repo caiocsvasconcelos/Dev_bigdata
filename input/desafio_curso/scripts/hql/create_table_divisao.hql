@@ -4,13 +4,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         )
         COMMENT 'Tabela de divisao'
         ROW FORMAT DELIMITED
-        FIELDS TERMINATED BY '|'
+        FIELDS TERMINATED BY ';'
         STORED AS TEXTFILE
         location '${HDFS_DIR}'
         TBLPROPERTIES ("skip.header.line.count"="1");
         
 
-        CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
+CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
           Division string,
           Division_Name string  
         )
@@ -28,7 +28,7 @@ INSERT OVERWRITE TABLE
 PARTITION(DT_FOTO)
 SELECT 
       Division string,
-      Division_Name string
+      Division_Name string,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
-  ;
+  ; 

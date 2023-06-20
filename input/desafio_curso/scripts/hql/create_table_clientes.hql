@@ -14,13 +14,13 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         )
         COMMENT 'Tabela de clientes'
         ROW FORMAT DELIMITED
-        FIELDS TERMINATED BY '|'
+        FIELDS TERMINATED BY ';'
         STORED AS TEXTFILE
         location '${HDFS_DIR}'
         TBLPROPERTIES ("skip.header.line.count"="1");
         
 
-        CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
+CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
           Address_Number string,
           Business_Family string,
           Business_Unit string,

@@ -4,7 +4,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         )
         COMMENT 'Tabela de regiao'
         ROW FORMAT DELIMITED
-        FIELDS TERMINATED BY '|'
+        FIELDS TERMINATED BY ';'
         STORED AS TEXTFILE
         location '${HDFS_DIR}'
         TBLPROPERTIES ("skip.header.line.count"="1");
