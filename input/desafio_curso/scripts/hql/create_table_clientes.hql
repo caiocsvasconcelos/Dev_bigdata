@@ -1,7 +1,16 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-          string,
-          string,
-          string  
+          Address_Number string,
+          Business_Family string,
+          Business_Unit string,
+          Customer string,
+          CustomerKey string,
+          Customer_Type string,
+          Division string,
+          Line_of_Business string,
+          Phone string,
+          Region_Code string,
+          Regional_Sales_Mgr string,
+          Search_Type string
         )
         COMMENT 'Tabela de clientes'
         ROW FORMAT DELIMITED
@@ -12,9 +21,18 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         
 
         CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-          string,
-          string,
-          string  
+          Address_Number string,
+          Business_Family string,
+          Business_Unit string,
+          Customer string,
+          CustomerKey string,
+          Customer_Type string,
+          Division string,
+          Line_of_Business string,
+          Phone string,
+          Region_Code string,
+          Regional_Sales_Mgr string,
+          Search_Type string 
         )
         PARTITIONED BY (DT_FOTO STRING)
         ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
@@ -29,9 +47,18 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-     string,
-      string,
-      string,
+      Address_Number string,
+      Business_Family string,
+      Business_Unit string,
+      Customer string,
+      CustomerKey string,
+      Customer_Type string,
+      Division string,
+      Line_of_Business string,
+      Phone string,
+      Region_Code string,
+      Regional_Sales_Mgr string,
+      Search_Type  string,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;

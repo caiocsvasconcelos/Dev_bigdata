@@ -23,5 +23,5 @@ do
     --hivevar TARGET_TABLE_EXTERNAL="${TARGET_TABLE_EXTERNAL}"\
     --hivevar TARGET_TABLE_GERENCIADA="${TARGET_TABLE_GERENCIADA}"\
     --hivevar PARTICAO="${PARTICAO}"\
-    -f ../../hql/create_table_$table.hql
+    -f ../hql/create_table_$table.hql
  done

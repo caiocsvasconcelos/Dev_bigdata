@@ -1,7 +1,6 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-          string,
-          string,
-          string  
+         Region_Code string,
+         Region_Name string 
         )
         COMMENT 'Tabela de regiao'
         ROW FORMAT DELIMITED
@@ -11,10 +10,9 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         TBLPROPERTIES ("skip.header.line.count"="1");
         
 
-        CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-          string,
-          string,
-          string  
+CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
+        Region_Code string,
+        Region_Name string   
         )
         PARTITIONED BY (DT_FOTO STRING)
         ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
@@ -29,9 +27,8 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-     string,
-      string,
-      string,
+      Region_Code string,
+      Region_Name string,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;
