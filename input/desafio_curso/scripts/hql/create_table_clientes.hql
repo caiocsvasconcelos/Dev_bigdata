@@ -1,14 +1,14 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-          Address_Number string,
+          Address_Number integer,
           Business_Family string,
-          Business_Unit string,
+          Business_Unit integer,
           Customer string,
-          CustomerKey string,
+          CustomerKey integer,
           Customer_Type string,
-          Division string,
+          Division integer,
           Line_of_Business string,
           Phone string,
-          Region_Code string,
+          Region_Code integer,
           Regional_Sales_Mgr string,
           Search_Type string
         )
@@ -21,16 +21,16 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         
 
 CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-          Address_Number string,
+          Address_Number integer,
           Business_Family string,
-          Business_Unit string,
+          Business_Unit integer,
           Customer string,
-          CustomerKey string,
+          CustomerKey integer,
           Customer_Type string,
-          Division string,
+          Division integer,
           Line_of_Business string,
           Phone string,
-          Region_Code string,
+          Region_Code integer,
           Regional_Sales_Mgr string,
           Search_Type string 
         )
@@ -47,18 +47,18 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-      Address_Number string,
-      Business_Family string,
-      Business_Unit string,
-      Customer string,
-      CustomerKey string,
-      Customer_Type string,
-      Division string,
-      Line_of_Business string,
-      Phone string,
-      Region_Code string,
-      Regional_Sales_Mgr string,
-      Search_Type  string,
+      Address_Number,
+      Business_Family,
+      Business_Unit,
+      Customer,
+      CustomerKey,
+      Customer_Type,
+      Division,
+      Line_of_Business,
+      Phone,
+      Region_Code,
+      Regional_Sales_Mgr,
+      Search_Type,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;

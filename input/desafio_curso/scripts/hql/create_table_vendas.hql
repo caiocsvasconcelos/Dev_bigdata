@@ -17,7 +17,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
           Sales_Cost_Amount string,
           Sales_Margin_Amount string,
           Sales_Price string,
-          Sales_Quantity string,
+          Sales_Quantity integer,
           Sales_Rep string,
           UM string    
         )
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
           Sales_Cost_Amount string,
           Sales_Margin_Amount string,
           Sales_Price string,
-          Sales_Quantity string,
+          Sales_Quantity integer,
           Sales_Rep string,
-          UM string  
+          UM string    
         )
         PARTITIONED BY (DT_FOTO STRING)
         ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
@@ -65,27 +65,27 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-     Actual_Delivery_Date string,
-     CustomerKey string,
-     DateKey string,
-     Discount_Amount string,
-     Invoice_Date string,
-     Invoice_Number string,
-     Item_Class string,
-     Item_Number string,
-     Item string,
-     Line_Number string,
-     List_Price string,
-     Order_Number string,
-     Promised_Delivery_Date string,
-     Sales_Amount string,
-     Sales_Amount_Based_on_List_Price string,
-     Sales_Cost_Amount string,
-     Sales_Margin_Amount string,
-     Sales_Price string,
-     Sales_Quantity string,
-     Sales_Rep string,
-     UM string,
+      Actual_Delivery_Date,
+      CustomerKey,
+      DateKey,
+      Discount_Amount,
+      Invoice_Date,
+      Invoice_Number,
+      Item_Class,
+      Item_Number,
+      Item,
+      Line_Number,
+      List_Price,
+      Order_Number,
+      Promised_Delivery_Date,
+      Sales_Amount,
+      Sales_Amount_Based_on_List_Price,
+      Sales_Cost_Amount,
+      Sales_Margin_Amount,
+      Sales_Price,
+      Sales_Quantity,
+      Sales_Rep,
+      UM,
     ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;

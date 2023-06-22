@@ -1,5 +1,5 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-          Division string,
+          Division int,
           Division_Name string
         )
         COMMENT 'Tabela de divisao'
@@ -11,7 +11,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         
 
 CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-          Division string,
+          Division int,
           Division_Name string  
         )
         PARTITIONED BY (DT_FOTO STRING)
@@ -27,8 +27,8 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-      Division string,
-      Division_Name string,
+      Division,
+      Division_Name,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ; 

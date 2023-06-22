@@ -1,5 +1,5 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-         Region_Code string,
+         Region_Code int,
          Region_Name string 
         )
         COMMENT 'Tabela de regiao'
@@ -11,7 +11,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         
 
 CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-        Region_Code string,
+        Region_Code int,
         Region_Name string   
         )
         PARTITIONED BY (DT_FOTO STRING)
@@ -27,8 +27,8 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-      Region_Code string,
-      Region_Name string,
+      Region_Code,
+      Region_Name,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;

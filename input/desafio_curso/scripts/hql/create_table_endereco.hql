@@ -1,5 +1,5 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
-          Address_Number string,
+          Address_Number int,
           City string,
           Country string,
           Customer_Address_1 string,
@@ -18,7 +18,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}(
         
 
 CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}(
-          Address_Number string,
+          Address_Number int,
           City string,
           Country string,
           Customer_Address_1 string,
@@ -41,15 +41,15 @@ INSERT OVERWRITE TABLE
     ${TARGET_DATABASE_SILVER}.${TARGET_TABLE_GERENCIADA}
 PARTITION(DT_FOTO)
 SELECT 
-      Address_Number string,
-      City string,
-      Country string,
-      Customer_Address_1 string,
-      Customer_Address_2 string,
-      Customer_Address_3 string,
-      Customer_Address_4 string,
-      State string,
-      Zip_Code string,
+      Address_Number,
+      City,
+      Country,
+      Customer_Address_1,
+      Customer_Address_2,
+      Customer_Address_3,
+      Customer_Address_4,
+      State,
+      Zip_Code,
       ${PARTICAO} as DT_FOTO  
   FROM  ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
   ;
