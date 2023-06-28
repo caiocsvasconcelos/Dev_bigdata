@@ -18,4 +18,4 @@ CREATE TABLE IF NOT EXISTS ${TARGET_DATABASE_GOLD}.${TARGET_TABLE_PRONTA}(
 SET hive.exec.dynamic.partition=true;
 SET hive.exec.dynamic.partition.mode=nonstrict;
 
- LOAD DATA INPATH '/datalake/gold/ft_vendas/part-00000-4d512f7e-21ed-46d6-b21a-32abd8a3305d-c000.csv' INTO TABLE desafio_curso_gold.ft_vendas;
+ LOAD DATA INPATH '/datalake/gold/ft_vendas/part-00000-7c05e180-e381-47f6-bc88-781c0af6a472-c000.csv' INTO TABLE desafio_curso_gold.ft_vendas;
