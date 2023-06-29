@@ -80,8 +80,10 @@ para a dimensão tempo considerar o campo da TBL_VENDAS <b>Invoice Date</b>
      **/pre_process:** Diretório para armazenar os Powershell que:
         - **create_env_all.sh** - Cria estruturas no HDFS com base no nome dos arquivos contidos no diretório "raw"
                                 - Aplica permissões de manipulação
-                                - Copia os arquivos locais do diretório "raw" para o datalake\raw 
+                                - Copia os arquivos locais do diretório "raw" para o datalake\raw
+        - **create_databases.sh** - Cria banco de dados
         - **create_env_charg_tables.sh** - Tem por finalidade, através do comando "beeline" executar os .hql. É por meio desse PowerShell que se passa todos os parâmetros utilizados nos arquivos .hql devidamente sincronizados por arquivo/tabela. 
+        - **insert_db_gold.sh** - Para esse powerShell será usado as tabelas dimencionais que foram armazenadas no **/datalake/gold/** e será criado as tabelas do banco dimencional e carregado os dados contidos no arquivo. Vale se atentar que ao realizar esse processo o hive move o arquivo que está na estrutura **/datalake/gold/**/ .csv para dentro do diretório raiz do banco **/user/hive/warehouse/desafio_curso_gold.db**
      **/process:** Nesse diretório encontra-se o arquivo process.py 
         - **process.py** - nesse arquivo encontra-se toda a estrutura spark e pyspark utilizada para o devido tratamento dos dados contidos no banco gerenciado. Após todo o tratamento, é realizado o processo de exportar os dados dimensionais gerados
      para o HDFS "datalake/gold" assim como é armazenado de forma local no diretório "desafio_curso/gold".
@@ -91,9 +93,10 @@ para a dimensão tempo considerar o campo da TBL_VENDAS <b>Invoice Date</b>
 0. dentro de \bigdata_docker executar ``docker-compose up -d`` para baixar e iniciar os container ou simplesmente ``docker-compose start`` para apenas iniciar os container
 1. ``$ docker exec -it hive-server bash`` para acessar o container via bash 
 2. root@hive_server:/input/desafio_curso/scripts/pre_process# ``./create_env_all.sh``
-3. root@hive_server:/input/desafio_curso/scripts/pre_process# ``./create_db.sh``   
+3. root@hive_server:/input/desafio_curso/scripts/pre_process# ``./create_databases.sh``   
 4. root@hive_server:/input/desafio_curso/scripts/pre_process# ``./create_env_charg_tables.sh``
 5. Em um novo terminal, ou fora do hive-server acessar o **jupyter-spark**  ``$ docker exec -it jupyter-spark bash``
 6. root@jupyter-spark:/input/desafio_curso/run#  ``./process.sh``
+7. root@hive_server:/input/desafio_curso/scripts/pre_process# ``./insert_db_gold.sh``
 7. Abrir o app/Projeto Vendas.pbix
 

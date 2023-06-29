@@ -5,7 +5,7 @@ from pyspark.sql import HiveContext
 from pyspark.sql.functions import *
 from pyspark.sql import functions as f
 import os
-import re  
+import re 
 
 spark=SparkSession.builder.master("local[*]")\
     .enableHiveSupport()\
@@ -185,7 +185,7 @@ dim_localidade = spark.sql('''
 ''')
 
 
-#Criando a Fato Pedidios
+#Criando a Fato Vendas
 ft_vendas = spark.sql('''
     SELECT cast(DW_CLIENTES as string) as DW_CLIENTES
         , cast(DW_LOCALIDADE as string) as DW_LOCALIDADE
