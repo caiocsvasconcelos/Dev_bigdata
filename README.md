@@ -65,8 +65,8 @@ para a dimensão tempo considerar o campo da TBL_VENDAS <b>Invoice Date</b>
 
 7. Realizar uploud da estrutura **desafio_curso**
 
-8. **desafio_curso** tem a seguinte estrutura de diretórios \n
-   **app:** Diretório do arquivo de execução do **app/Projeto Vendas.pbix**.
+8. **desafio_curso** tem a seguinte estrutura de diretórios
+  * **app:** Diretório do arquivo de execução do **app/Projeto Vendas.pbix**.
    **config:** Diretório de do .sh de configurações gerais do projeto
    **gold:** Diretório dos arquivos dimensionais
    **raw:** Diretório dos arquivos fonte de dados em .csv
