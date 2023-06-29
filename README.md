@@ -67,25 +67,25 @@ para a dimensão tempo considerar o campo da TBL_VENDAS <b>Invoice Date</b>
 
 8. **desafio_curso** tem a seguinte estrutura de diretórios
   * **app:** Diretório do arquivo de execução do **app/Projeto Vendas.pbix**.
-   **config:** Diretório de do .sh de configurações gerais do projeto
-   **gold:** Diretório dos arquivos dimensionais
-   **raw:** Diretório dos arquivos fonte de dados em .csv
-   **run:** Diretório do PowerShell process que executará o processo process.py
-   **scripts:** 
-     **/hql:**  Diretório que conterá os arquivos .hql. Cada arquivo tem três estruturas:
+  * **config:** Diretório de do .sh de configurações gerais do projeto
+  * **gold:** Diretório dos arquivos dimensionais
+  * **raw:** Diretório dos arquivos fonte de dados em .csv
+  * **run:** Diretório do PowerShell process que executará o processo process.py
+  * **scripts:** 
+    * **/hql:**  Diretório que conterá os arquivos .hql. Cada arquivo tem três estruturas:
         - Criação das estruturas de banco Externa no Hive, fazendo uso dos dados do HDFS; 
         - Criação das tabelas Internas ou gerenciadas, também dentro do Hive; 
         - Carga de dados nas tabelas gerenciadas a partir dos dados do HDFS, adicionando na carga um campo de versionamento da carga (dt_foto)
-     **/hql:** Temos também um .hql exclusivo para a criação dos bancos de dados que serão utilizados   
-     **/pre_process:** Diretório para armazenar os Powershell que:
-        - **create_env_all.sh** - Cria estruturas no HDFS com base no nome dos arquivos contidos no diretório "raw"
+    * **/hql:** Temos também um .hql exclusivo para a criação dos bancos de dados que serão utilizados   
+    * **/pre_process:** Diretório para armazenar os Powershell que:
+       * - **create_env_all.sh** - Cria estruturas no HDFS com base no nome dos arquivos contidos no diretório "raw"
                                 - Aplica permissões de manipulação
                                 - Copia os arquivos locais do diretório "raw" para o datalake\raw
-        - **create_databases.sh** - Cria banco de dados
-        - **create_env_charg_tables.sh** - Tem por finalidade, através do comando "beeline" executar os .hql. É por meio desse PowerShell que se passa todos os parâmetros utilizados nos arquivos .hql devidamente sincronizados por arquivo/tabela. 
-        - **insert_db_gold.sh** - Para esse powerShell será usado as tabelas dimencionais que foram armazenadas no **/datalake/gold/** e será criado as tabelas do banco dimencional e carregado os dados contidos no arquivo. Vale se atentar que ao realizar esse processo o hive move o arquivo que está na estrutura **/datalake/gold/**/ .csv para dentro do diretório raiz do banco **/user/hive/warehouse/desafio_curso_gold.db**
-     **/process:** Nesse diretório encontra-se o arquivo process.py 
-        - **process.py** - nesse arquivo encontra-se toda a estrutura spark e pyspark utilizada para o devido tratamento dos dados contidos no banco gerenciado. Após todo o tratamento, é realizado o processo de exportar os dados dimensionais gerados
+       * - **create_databases.sh** - Cria banco de dados
+       * - **create_env_charg_tables.sh** - Tem por finalidade, através do comando "beeline" executar os .hql. É por meio desse PowerShell que se passa todos os parâmetros utilizados nos arquivos .hql devidamente sincronizados por arquivo/tabela. 
+       * - **insert_db_gold.sh** - Para esse powerShell será usado as tabelas dimencionais que foram armazenadas no **/datalake/gold/** e será criado as tabelas do banco dimencional e carregado os dados contidos no arquivo. Vale se atentar que ao realizar esse processo o hive move o arquivo que está na estrutura **/datalake/gold/**/ .csv para dentro do diretório raiz do banco **/user/hive/warehouse/desafio_curso_gold.db**
+    * **/process:** Nesse diretório encontra-se o arquivo process.py 
+       * - **process.py** - nesse arquivo encontra-se toda a estrutura spark e pyspark utilizada para o devido tratamento dos dados contidos no banco gerenciado. Após todo o tratamento, é realizado o processo de exportar os dados dimensionais gerados
      para o HDFS "datalake/gold" assim como é armazenado de forma local no diretório "desafio_curso/gold".
 
 **Ordem e local para executar os devidos comandos:**
